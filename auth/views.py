@@ -10,10 +10,10 @@ def register_request(request):
 			user = form.save()
 			login(request, user)
 			messages.success(request, "Registration successful." )
-			return redirect("auth:homepage")
+			return redirect("homepage")
 		messages.error(request, "Unsuccessful registration. Invalid information.")
 	form = RegistrationForm()
-	return render (request=request, template_name="auth/register.html", context={"register_form":form})
+	return render (request=request, template_name="register.html", context={"register_form":form})
 
 def homepage(request):
-	return render(request=request, template_name='auth/homepage.html')
+	return render(request=request, template_name='homepage.html')
