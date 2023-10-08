@@ -42,10 +42,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'crispy_forms',
     'crispy_bootstrap4',
-    'auth.apps.AuthConfig',
     'rest_framework',
     'rest_framework_simplejwt',
-    'drf_spectacular'
+    'drf_spectacular',
+    'core.apps.CoreConfig'
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -144,6 +144,4 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-AUTH_USER_MODEL = 'core.User'
-
-
+AUTH_USER_MODEL = 'core.CustomUser'
