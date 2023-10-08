@@ -45,8 +45,12 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'drf_spectacular',
-    'core.apps.CoreConfig'
+    'encrypted_model_fields',
+    'core.apps.CoreConfig',
+    'passwords.apps.PasswordsConfig'
 ]
+
+FIELD_ENCRYPTION_KEY = env('FIELD_ENCRYPTION_KEY')
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
