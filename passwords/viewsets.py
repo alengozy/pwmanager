@@ -1,12 +1,12 @@
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin
+from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, ListModelMixin
 from .serializers import SecretPasswordSerializer
 from .models import SecretPassword
 
 
 # Create your views here.
-class SecretPasswordViewSet(GenericViewSet, CreateModelMixin, RetrieveModelMixin):
+class SecretPasswordViewSet(GenericViewSet, CreateModelMixin, RetrieveModelMixin, ListModelMixin):
     permission_classes = (IsAuthenticated,)
     serializer_class = SecretPasswordSerializer
 

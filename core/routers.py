@@ -1,4 +1,4 @@
-from .viewsets import RegisterViewSet
+from .views import RegisterViewSet
 
 def register_core_router(router):
     router.register(r'register', RegisterViewSet, basename='register')
