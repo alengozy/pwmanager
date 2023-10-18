@@ -133,7 +133,10 @@ SIMPLE_JWT = {
 }
 
 CORS_ORIGIN_ALLOW_ALL = True
-
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_ORIGIN_WHITELIST = (
+    'http://localhost:3000',  # Replace with the actual origin of your frontend.
+)
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/

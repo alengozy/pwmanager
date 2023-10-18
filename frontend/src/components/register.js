@@ -1,15 +1,21 @@
-import axios from "../custom_axios";
+import axios from "axios";
 import React, { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-export const Login = () => {
-  const [formData, setFormData] = useState({ username: "", password: "" });
+export const Register = () => {
+  const [formData, setFormData] = useState({ username: "", password: ""});
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('api/login/', formData, {
+      await axios.post('http://localhost:8000/api/register/', formData, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        //withCredentials: true,
+      });
+      const response = await axios.post('http://localhost:8000/api/login/', formData, { 
         headers: {
           'Content-Type': 'application/json',
         },
@@ -37,7 +43,7 @@ export const Login = () => {
     <div className="container d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
       <div className="card p-3" style={{ width: "300px" }}>
         <form className="Auth-form" onSubmit={handleSubmit}>
-          <h3 className="Auth-form-title mb-3">Sign In</h3>
+          <h3 className="Auth-form-title mb-3">Register</h3>
           <div className="mb-3">
             <label htmlFor="username" className="form-label">Username</label>
             <input

@@ -1,6 +1,6 @@
 // Import the react JS packages
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios from "../custom_axios";
 
 // Define the Home function.
 export const Home = () => {
@@ -13,11 +13,12 @@ export const Home = () => {
       (async () => {
         try {
           const { data } = await axios.get(
-            'http://localhost:8000/home/',
+            'home/',
             {
               headers: {
                 'Content-Type': 'application/json',
               },
+              withCredentials: true,
             }
           );
           setMessage(data.message);
