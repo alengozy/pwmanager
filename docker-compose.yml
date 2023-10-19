@@ -2,11 +2,23 @@ version: '3.8'
 
 services:
 
-  web:
-    build: .
+  frontend:
+    build:
+      context: ./frontend  # Path to the frontend directory
+    command: npm start    # Adjust this based on your frontend setup
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app   # Mount the frontend code
+    environment:
+      - REACT_APP_BACKEND_URL=http://localhost:8000
+
+  backend:
+    build:
+      context: ./backend
     command: poetry run python manage.py runserver 0.0.0.0:8000
     volumes:
-      - .:/pwmanager
+      - ./backend:/app
     ports:
       - "8000:8000"
     environment:
@@ -14,6 +26,7 @@ services:
     depends_on:
       - db
 
+  
   db:
     image: postgres:15.3
     ports:
