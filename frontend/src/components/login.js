@@ -1,14 +1,19 @@
 import axios from "../custom_axios";
 import React, { useState } from "react";
+import UserForm from "./user_form";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const Login = () => {
-  const [formData, setFormData] = useState({ username: "", password: "" });
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const title = 'Login'
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
+      const formData = { username: username, password: password }
       const response = await axios.post('api/login/', formData, {
         headers: {
           'Content-Type': 'application/json',
@@ -29,48 +34,23 @@ export const Login = () => {
       window.location.href = '/';
     } catch (error) {
       // Handle errors, e.g., display an error message
+      setError('Incorrect username or password. Please try again!')
       console.error("Login failed:", error);
     }
   };
 
   return (
-    <div className="container d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
-      <div className="card p-3" style={{ width: "300px" }}>
-        <form className="Auth-form" onSubmit={handleSubmit}>
-          <h3 className="Auth-form-title mb-3">Sign In</h3>
-          <div className="mb-3">
-            <label htmlFor="username" className="form-label">Username</label>
-            <input
-              type="text"
-              className="form-control"
-              id="username"
-              placeholder="Enter Username"
-              name="username"
-              value={formData.username}
-              onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-              required
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="password" className="form-label">Password</label>
-            <input
-              type="password"
-              className="form-control"
-              id="password"
-              placeholder="Enter Password"
-              name="password"
-              value={formData.password}
-              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-              required
-            />
-          </div>
-          <div className="d-grid">
-            <button type="submit" className="btn btn-primary">
-              Submit
-            </button>
-          </div>
-        </form>
-      </div>
+    <div>
+      <UserForm
+        title={title}
+        handleSubmit={handleSubmit}
+        username={username}
+        password={password}
+        setUsername={setUsername}
+        setPassword={setPassword}
+        showConfirmPasswordField={false}
+        error={error}
+      />
     </div>
   );
-};
+}

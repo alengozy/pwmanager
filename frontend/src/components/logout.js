@@ -17,11 +17,12 @@ export const Logout = () => {
             withCredentials: true, // This option should be in the same object as headers
           }
         );
-        localStorage.clear();
         delete axios.defaults.headers.common["Authorization"]; // Remove the header
-        window.location.href = "/login";
-      } catch (e) {
+      } catch (e) {        
         console.error("Logout failed:", e);
+      } finally {
+        localStorage.clear()
+        window.location.href = '/login'
       }
     })();
   }, []);

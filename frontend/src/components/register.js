@@ -1,6 +1,6 @@
 import axios from "../custom_axios";
 import React, { useState, useEffect } from "react";
-//import 'bootstrap/dist/css/bootstrap.min.css';
+import UserForm from "./user_form";
 import { Col, Button, Row, Container, Card, Form } from "react-bootstrap";
 
 export const Register = () => {
@@ -8,7 +8,7 @@ export const Register = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordsMatch, setPasswordsMatch] = useState(true);
-  
+  const title = 'Register'
   useEffect(() => {
     if (password === confirmPassword) {
       setPasswordsMatch(true);
@@ -57,83 +57,18 @@ export const Register = () => {
     
   };
   return (
-    <div>
-      <Container>
-        <Row className="vh-100 d-flex justify-content-center align-items-center">
-          <Col md={8} lg={6} xs={12}>
-          <div className="border border-2 border-primary"></div>
-            <Card className="shadow px-4">
-              <Card.Body>
-                <div className="mb-3 mt-md-4">
-                  <h2 className="fw-bold mb-2 text-center text-uppercase ">Register</h2>
-                  <div className="mb-3">
-                    <Form onSubmit={handleSubmit}>
-                      <Form.Group className="mb-3" controlId="Name">
-                        <Form.Label className="text-center">
-                          Username
-                        </Form.Label>
-                        <Form.Control 
-                            type="text"
-                            placeholder="johndoe"
-                            name="username"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                            required/>
-                      </Form.Group>
-
-                      <Form.Group
-                        className="mb-3"
-                        controlId="password"
-                      >
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control 
-                            type="password"
-                            placeholder="Keep it secret..."
-                            name="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required/>
-                      </Form.Group>
-                      <Form.Group
-                        className="mb-3"
-                        controlId="check_password"
-                      >
-                        <Form.Label>Confirm Password</Form.Label>
-                        <Form.Control
-                            type="password"
-                            placeholder="Confirm Password"
-                            name="password"
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                            required/>
-                      </Form.Group>
-                      <Form.Group
-                        className="mb-3"
-                        controlId="formBasicCheckbox"
-                      >
-                      </Form.Group>
-                      {!passwordsMatch && <div className="error-message">Passwords do not match.</div>}
-                      <div className="d-grid">
-                        <Button variant="primary" type="submit">
-                          Create Account
-                        </Button>
-                      </div>
-                    </Form>
-                    <div className="mt-3">
-                      <p className="mb-0  text-center">
-                      Already have an account??{" "}
-                        <a href="/login" className="text-primary fw-bold">
-                          Sign In
-                        </a>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-      </Container>
-    </div>
+    <UserForm title={title}
+              handleSubmit={handleSubmit}
+              username={username}
+              password={password}
+              confirmPassword={confirmPassword}
+              setUsername={setUsername}
+              setPassword={setPassword}
+              setConfirmPassword={setConfirmPassword}
+              passwordsMatch={passwordsMatch}
+              // showUsernameField={true}
+              // showPasswordField={true}
+              // showConfirmPasswordField={true}
+    />
   )
 }
