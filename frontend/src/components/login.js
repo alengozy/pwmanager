@@ -1,18 +1,19 @@
 import axios from "../custom_axios";
 import React, { useState } from "react";
 import UserForm from "./user_form";
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 export const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [error, setError] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
   const title = 'Login'
-
+  const button_text = 'Login';
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
+      setIsLoading(true)
       const formData = { username: username, password: password }
       const response = await axios.post('api/login/', formData, {
         headers: {
@@ -37,6 +38,9 @@ export const Login = () => {
       setError('Incorrect username or password. Please try again!')
       console.error("Login failed:", error);
     }
+    finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -50,6 +54,8 @@ export const Login = () => {
         setPassword={setPassword}
         showConfirmPasswordField={false}
         error={error}
+        button_text={button_text}
+        isLoading={isLoading}
       />
     </div>
   );

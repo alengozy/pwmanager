@@ -8,15 +8,17 @@ import { Logout } from './components/logout';
 
 function App() {
     return (
-        <BrowserRouter>
-            <Navigation></Navigation>
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/logout" element={<Logout />} />
-                <Route path="/register" element={<Register />} />
-            </Routes>
-        </BrowserRouter>
+        <div className='flex'>
+             <Navigation/>
+        </div>
+        // <BrowserRouter>
+        //     <Routes>
+        //         <Route path="/" element={<Home />} />
+        //         <Route path="/login" element={<Login />} />
+        //         <Route path="/logout" element={<Logout />} />
+        //         <Route path="/register" element={<Register />} />
+        //     </Routes>
+        // </BrowserRouter>
     );
 }
 

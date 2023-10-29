@@ -8,7 +8,9 @@ export const Register = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordsMatch, setPasswordsMatch] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const title = 'Register'
+  const button_text = 'Create Account'
   useEffect(() => {
     if (password === confirmPassword) {
       setPasswordsMatch(true);
@@ -19,9 +21,9 @@ export const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if(password === confirmPassword){
-        try {
+        try { 
+            setIsLoading(true);
             const formData = { username: username, password: password }
             await axios.post('http://localhost:8000/api/register/', formData, {
               headers: {
@@ -44,12 +46,15 @@ export const Register = () => {
       
             // Set authorization header for future API requests
             axios.defaults.headers.common['Authorization'] = `Bearer ${access}`;
-      
+            
             // Redirect to the home page
             window.location.href = '/';
           } catch (error) {
             // Handle errors, e.g., display an error message
             console.error("Register failed:", error);
+          }
+          finally {
+            setIsLoading(false)
           }
     } else {
         console.error("Passwords do not match!")
@@ -66,9 +71,8 @@ export const Register = () => {
               setPassword={setPassword}
               setConfirmPassword={setConfirmPassword}
               passwordsMatch={passwordsMatch}
-              // showUsernameField={true}
-              // showPasswordField={true}
-              // showConfirmPasswordField={true}
+              button_text={button_text}
+              isLoading={isLoading}
     />
   )
 }

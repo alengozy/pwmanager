@@ -1,5 +1,6 @@
 import React from "react";
-import { Container, Row, Col, Card, Form, Button } from "react-bootstrap";
+import { Container, Row, Col, Card, Form, Button, Spinner } from "react-bootstrap";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function UserForm({
   title,
@@ -7,6 +8,7 @@ function UserForm({
   showUsernameField = true,
   showPasswordField = true,
   showConfirmPasswordField = true,
+  showLoginInstead = true,
   username,
   password,
   confirmPassword,
@@ -14,14 +16,16 @@ function UserForm({
   setPassword,
   setConfirmPassword,
   passwordsMatch,
+  isLoading,
   error,
+  button_text,
 }) {
   return (
     <div>
       <Container>
         <Row className="vh-100 d-flex justify-content-center align-items-center">
           <Col md={8} lg={6} xs={12}>
-            <div className="border border-2 border-primary"></div>
+            <div className="border border-primary"></div>
             <Card className="shadow px-4">
               <Card.Body>
                 <div className="mb-3 mt-md-4">
@@ -50,9 +54,7 @@ function UserForm({
                         <Form.Group className="mb-3" controlId="password">
                           <Form.Label>Password</Form.Label>
                           <Form.Control
-                            className={`"" ${
-                                !error ? "" : "is-invalid"
-                              }`}
+                            className={`"" ${!error ? "" : "is-invalid"}`}
                             type="password"
                             placeholder="Keep it secret..."
                             name="password"
@@ -61,9 +63,7 @@ function UserForm({
                             required
                           />
                           {!error ? null : (
-                            <div className="invalid-feedback">
-                               {error}
-                            </div>
+                            <div className="invalid-feedback">{error}</div>
                           )}
                         </Form.Group>
                       )}
@@ -95,20 +95,28 @@ function UserForm({
                         controlId="formBasicCheckbox"
                       ></Form.Group>
 
-                      <div className="d-grid">
-                        <Button variant="primary" type="submit">
-                          Create Account
-                        </Button>
-                      </div>
+                      {isLoading ? (
+                        <div className="text-center">
+                          <Spinner animation="border" variant="primary" />
+                        </div>
+                      ) : (
+                        <div className="d-grid">
+                          <Button variant="primary" type="submit">
+                            {button_text}
+                          </Button>
+                        </div>
+                      )}
                     </Form>
-                    <div className="mt-3">
-                      <p className="mb-0 text-center">
-                        Already have an account?{" "}
-                        <a href="/login" className="text-primary fw-bold">
-                          Sign In
-                        </a>
-                      </p>
-                    </div>
+                    {showLoginInstead && !isLoading && (
+                      <div className="mt-3">
+                        <p className="mb-0 text-center">
+                          Already have an account?{" "}
+                          <a href="/login" className="text-primary fw-bold">
+                            Sign In
+                          </a>
+                        </p>
+                      </div>
+                    )}
                   </div>
                 </div>
               </Card.Body>

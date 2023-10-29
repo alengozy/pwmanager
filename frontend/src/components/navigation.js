@@ -1,28 +1,25 @@
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import React, { useState, useEffect} from 'react';
+import { FaFire, FaLock, FaUser } from 'react-icons/fa'
+import React, { useState, useEffect } from "react";
 export function Navigation() {
-   const [isAuth, setIsAuth] = useState(false);
-   useEffect(() => {
-     if (localStorage.getItem('access_token') !== null) {
-        setIsAuth(true); 
-      }
-    }, [isAuth]);
-     return ( 
-      <div>
-        <Navbar bg="dark" variant="dark">
-          <Navbar.Brand href="/">Password Manager</Navbar.Brand>            
-          <Nav className="me-auto"> 
-          {isAuth ? <Nav.Link href="/">Home</Nav.Link> : null}
-          </Nav>
-          <Nav>
-          {isAuth ? <Nav.Link href="/logout">Logout</Nav.Link> :  
-                    <Nav.Link href="/login">Login</Nav.Link>}
-          </Nav>
-          <Nav>
-          {!isAuth && <Nav.Link href="/register">Register</Nav.Link>}
-          </Nav>
-        </Navbar>
-       </div>
-     );
+  const [isAuth, setIsAuth] = useState(false);
+  useEffect(() => {
+    if (localStorage.getItem("access_token") !== null) {
+      setIsAuth(true);
+    }
+  }, [isAuth]);
+  return (
+    <div className="fixed top-0 left-0 h-screen w-16 m-0 flex flex-col text-white bg-gray-900 shadow-lg">
+      <SideBarIcon href='/login' icon={<FaLock size="28"/>}/>
+      <SideBarIcon icon={<FaUser size="28"/>}/>
+    </div>
+  );
+}
+
+const SideBarIcon = ({ icon }) => {
+  return (
+    <div className="sidebar-icon">
+      { icon }
+    </div>
+
+  )
 }

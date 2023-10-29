@@ -1,6 +1,8 @@
 // Import the react JS packages
 import { useEffect, useState } from "react";
 import axios from "../custom_axios";
+import { Container, Row, Col } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Define the Home function.
 export const Home = () => {
@@ -30,8 +32,6 @@ export const Home = () => {
   }, []);
 
   return (
-    <div className="form-signin mt-5 text-center">
-      <h3>Hi {message}</h3>
-    </div>
+    <></>
   );
 };
