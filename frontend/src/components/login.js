@@ -1,12 +1,13 @@
 import axios from "../custom_axios";
 import React, { useState } from "react";
 import UserForm from "./user_form";
-
-export const Login = () => {
+import { useNavigate } from "react-router-dom";
+export const Login = ({updateAuthStatus}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
   const title = 'Login'
   const button_text = 'Login';
   const handleSubmit = async (e) => {
@@ -30,9 +31,9 @@ export const Login = () => {
 
       // Set authorization header for future API requests
       axios.defaults.headers.common['Authorization'] = `Bearer ${access}`;
-
+      updateAuthStatus(true)
       // Redirect to the home page
-      window.location.href = '/';
+      navigate('/')
     } catch (error) {
       // Handle errors, e.g., display an error message
       setError('Incorrect username or password. Please try again!')
@@ -44,19 +45,18 @@ export const Login = () => {
   };
 
   return (
-    <div>
-      <UserForm
-        title={title}
-        handleSubmit={handleSubmit}
-        username={username}
-        password={password}
-        setUsername={setUsername}
-        setPassword={setPassword}
-        showConfirmPasswordField={false}
-        error={error}
-        button_text={button_text}
-        isLoading={isLoading}
-      />
-    </div>
+    <UserForm
+      title={title}
+      handleSubmit={handleSubmit}
+      username={username}
+      password={password}
+      setUsername={setUsername}
+      setPassword={setPassword}
+      showConfirmPasswordField={false}
+      error={error}
+      button_text={button_text}
+      isLoading={isLoading}
+      showLoginInstead={true}
+    />
   );
 }

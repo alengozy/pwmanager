@@ -1,9 +1,9 @@
 import axios from "../custom_axios";
 import React, { useState, useEffect } from "react";
 import UserForm from "./user_form";
-import { Col, Button, Row, Container, Card, Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
-export const Register = () => {
+export const Register = ({updateAuthStatus}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -11,6 +11,7 @@ export const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
   const title = 'Register'
   const button_text = 'Create Account'
+  const navigate = useNavigate()
   useEffect(() => {
     if (password === confirmPassword) {
       setPasswordsMatch(true);
@@ -46,9 +47,9 @@ export const Register = () => {
       
             // Set authorization header for future API requests
             axios.defaults.headers.common['Authorization'] = `Bearer ${access}`;
-            
+            updateAuthStatus(true)
             // Redirect to the home page
-            window.location.href = '/';
+            navigate('/')
           } catch (error) {
             // Handle errors, e.g., display an error message
             console.error("Register failed:", error);

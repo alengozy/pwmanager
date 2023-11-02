@@ -8,7 +8,7 @@ function UserForm({
   showUsernameField = true,
   showPasswordField = true,
   showConfirmPasswordField = true,
-  showLoginInstead = true,
+  showLoginInstead = false,
   username,
   password,
   confirmPassword,
@@ -21,9 +21,9 @@ function UserForm({
   button_text,
 }) {
   return (
-    <div>
+    <div className="main-content"> 
       <Container>
-        <Row className="vh-100 d-flex justify-content-center align-items-center">
+        <Row className="vh-100 flex justify-content-center align-items-center">
           <Col md={8} lg={6} xs={12}>
             <div className="border border-primary"></div>
             <Card className="shadow px-4">
@@ -45,6 +45,7 @@ function UserForm({
                             name="username"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
+                            disabled={isLoading}
                             required
                           />
                         </Form.Group>
@@ -60,6 +61,7 @@ function UserForm({
                             name="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
+                            disabled={isLoading}
                             required
                           />
                           {!error ? null : (
@@ -80,6 +82,7 @@ function UserForm({
                             name="password"
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
+                            disabled={isLoading}
                             required
                           />
                           {passwordsMatch ? null : (
@@ -107,7 +110,7 @@ function UserForm({
                         </div>
                       )}
                     </Form>
-                    {showLoginInstead && !isLoading && (
+                    {!showLoginInstead && !isLoading && (
                       <div className="mt-3">
                         <p className="mb-0 text-center">
                           Already have an account?{" "}

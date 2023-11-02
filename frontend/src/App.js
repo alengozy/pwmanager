@@ -1,25 +1,34 @@
-import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Login } from "./components/login";
 import { Register } from "./components/register";
 import { Home } from "./components/home";
-import { Navigation } from './components/navigation';
-import { Logout } from './components/logout';
+import { Passwords } from "./components/passwords";
+import { Navigation } from "./components/navigation";
+import { Logout } from "./components/logout";
+import { useState } from "react";
 
 function App() {
-    return (
-        <div className='flex'>
-             <Navigation/>
-        </div>
-        // <BrowserRouter>
-        //     <Routes>
-        //         <Route path="/" element={<Home />} />
-        //         <Route path="/login" element={<Login />} />
-        //         <Route path="/logout" element={<Logout />} />
-        //         <Route path="/register" element={<Register />} />
-        //     </Routes>
-        // </BrowserRouter>
-    );
+  const [isAuth, setIsAuth] = useState(false);
+
+  const updateAuthStatus = (status) => {
+    setIsAuth(status);
+  };
+
+  return (
+    <div className="flex">
+      <BrowserRouter>
+        <Navigation isAuth={isAuth} updateAuthStatus={updateAuthStatus} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/passwords" element={<Passwords />} />
+          <Route path="/login" element={<Login updateAuthStatus={updateAuthStatus}/>} />
+          <Route path="/logout" element={<Logout updateAuthStatus={updateAuthStatus}/>} />
+          <Route path="/register" element={<Register updateAuthStatus={updateAuthStatus}/>} />
+        </Routes>
+      </BrowserRouter>
+    </div>
+  );
 }
 
 export default App;

@@ -1,37 +1,18 @@
-// Import the react JS packages
-import { useEffect, useState } from "react";
-import axios from "../custom_axios";
-import { Container, Row, Col } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-
-// Define the Home function.
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Spinner } from "react-bootstrap";
 export const Home = () => {
-  const [message, setMessage] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (localStorage.getItem('access_token') === null) {
-      window.location.href = '/login';
-    } else {
-      (async () => {
-        try {
-          const { data } = await axios.get(
-            'home/',
-            {
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              withCredentials: true,
-            }
-          );
-          setMessage(data.message);
-        } catch (e) {
-          console.log('not auth');
-        }
-      })();
+    const accessToken = localStorage.getItem("access_token");
+    if (!accessToken) {
+      navigate("/login");
+      return;
     }
-  }, []);
-
-  return (
-    <></>
-  );
+  }, [navigate]);
+  return <div className="main-content flex w-full h-full fixed items-center justify-center">
+  <Spinner className="!w-24 !h-24" animation="border" variant="primary" />
+</div>;
 };

@@ -4,3 +4,42 @@
 @import 'tailwindcss/utilities';
 
 /* Add your custom styles here if needed */
+@layer components{
+
+    .sidebar-icon{
+        @apply relative flex items-center justify-center
+        h-12 w-12 mt-2 mb-2 mx-auto shadow-lg
+        bg-gray-800 text-white
+        hover:bg-cyan-400
+        rounded-3xl hover:rounded-xl
+        transition-all duration-300 ease-linear
+        cursor-pointer;
+    }
+  
+    .sidebar-tooltip {
+        @apply absolute w-auto p-2 m-2 min-w-max left-14
+        rounded-md shadow-md
+        text-white bg-gray-900
+        text-xs font-bold
+        transition-all duration-100 scale-0 origin-left;
+    }
+
+    .grid-container {
+        @apply grid grid-cols-3 gap-3 max-w-[800px] m-auto
+    }
+
+    .grid-item {
+        @apply p-10 border-solid border-2 border-[#ccc] text-center bg-[#f2f2f2]
+    }
+}
+@layer utilities {
+    .sidebar-hr {
+        @apply bg-white dark:bg-gray-800
+        border border-white dark:border-gray-800 rounded-full
+        mx-2;
+    }
+
+    .main-content {
+        @apply flex-1 ml-16;
+    }
+}
