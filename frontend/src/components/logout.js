@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import axios from "../custom_axios";
+import axiosInstance from "../custom_axios";
 import { Spinner } from "react-bootstrap";
 import { useNavigate } from "react-router-dom"
 export const Logout = ({updateAuthStatus}) => {
@@ -8,7 +8,7 @@ export const Logout = ({updateAuthStatus}) => {
   useEffect(() => {
     (async () => {
       try {
-        await axios.post(
+        await axiosInstance.post(
           "api/logout/",
           {
             refresh_token: localStorage.getItem("refresh_token"),
@@ -21,7 +21,7 @@ export const Logout = ({updateAuthStatus}) => {
           }
         );
         updateAuthStatus(false)
-        delete axios.defaults.headers.common["Authorization"]; // Remove the header
+        delete axiosInstance.defaults.headers.common["Authorization"]; // Remove the header
       } catch (e) {
         console.error("Logout failed:", e);
       } finally {
@@ -29,7 +29,7 @@ export const Logout = ({updateAuthStatus}) => {
         navigate('/login')
       }
     })();
-  }, [navigate]);
+  }, [navigate, updateAuthStatus]);
 
   return (
     <div className="main-content justify-center items-center">

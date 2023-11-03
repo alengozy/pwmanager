@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
-import axios from "../custom_axios";
+import axiosInstance from "../custom_axios";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export const Passwords = () => {
   const [passwords, setPasswords] = useState([]);
-  const [passwordVisible, setPasswordVisible] = useState(false);
+  const [passwordVisible, setPasswordVisible] = useState([]);
   const navigate = useNavigate();
 
-  const togglePasswordVisibility = () => {
-    setPasswordVisible(!passwordVisible);}
+  const togglePasswordVisibility = (index) => {
+    const updatedPasswordVisible = [...passwordVisible];
+    updatedPasswordVisible[index] = !updatedPasswordVisible[index];
+    setPasswordVisible(updatedPasswordVisible);
+  };
 
   useEffect(() => {
     const accessToken = localStorage.getItem("access_token");
@@ -20,13 +23,13 @@ export const Passwords = () => {
 
     (async () => {
       try {
-        const response = await axios.get("/api/password/", {
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            withCredentials: true,
-          });
+        console.log("Current access token:", localStorage.getItem("access_token"));
+        const response = await axiosInstance.get("/api/password/", {
+          withCredentials: true,
+        });
         setPasswords(response.data);
+        // Initialize the visibility array with all passwords hidden
+        setPasswordVisible(new Array(response.data.length).fill(false));
       } catch (error) {
         console.error("Error fetching passwords:", error);
       }
@@ -51,11 +54,11 @@ export const Passwords = () => {
             <td>{password.name}</td>
             <td>{password.account}</td>
             <td>
-              {passwordVisible ? password.key : "********"}
+              {passwordVisible[index] ? password.key : "********"}
             </td>
             <td>
-              <button onClick={togglePasswordVisibility}>
-                {passwordVisible ? "Hide" : "Reveal"}
+              <button onClick={() => togglePasswordVisibility(index)}>
+                {passwordVisible[index] ? "Hide" : "Reveal"}
               </button>
             </td>
           </tr>

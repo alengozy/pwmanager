@@ -1,4 +1,4 @@
-import axios from "../custom_axios";
+import axiosInstance from "../custom_axios";
 import React, { useState } from "react";
 import UserForm from "./user_form";
 import { useNavigate } from "react-router-dom";
@@ -16,7 +16,7 @@ export const Login = ({updateAuthStatus}) => {
     try {
       setIsLoading(true)
       const formData = { username: username, password: password }
-      const response = await axios.post('api/login/', formData, {
+      const response = await axiosInstance.post('api/login/', formData, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -30,7 +30,7 @@ export const Login = ({updateAuthStatus}) => {
       localStorage.setItem('refresh_token', refresh);
 
       // Set authorization header for future API requests
-      axios.defaults.headers.common['Authorization'] = `Bearer ${access}`;
+      axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${access}`;
       updateAuthStatus(true)
       // Redirect to the home page
       navigate('/')

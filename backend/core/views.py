@@ -12,6 +12,7 @@ from .models import CustomUser
 # Create your views here.
 
 class HomeView(GenericAPIView):
+     serializer_class = None
      permission_classes = (IsAuthenticated,)
 
      def get(self,request):
@@ -20,10 +21,11 @@ class HomeView(GenericAPIView):
      
      
 class LogoutView(GenericAPIView):
+     serializer_class = None
      permission_classes = (IsAuthenticated,)
      def post(self, request):
           try:
-               refresh_token = request.data["refresh_token"]
+               refresh_token = request.data["refresh"]
                token = RefreshToken(refresh_token)
                token.blacklist()
                return Response(status=status.HTTP_205_RESET_CONTENT)

@@ -1,4 +1,4 @@
-import axios from "../custom_axios";
+import axiosInstance from "../custom_axios";
 import React, { useState, useEffect } from "react";
 import UserForm from "./user_form";
 import { useNavigate } from "react-router-dom";
@@ -26,13 +26,13 @@ export const Register = ({updateAuthStatus}) => {
         try { 
             setIsLoading(true);
             const formData = { username: username, password: password }
-            await axios.post('http://localhost:8000/api/register/', formData, {
+            await axiosInstance.post('http://localhost:8000/api/register/', formData, {
               headers: {
                 'Content-Type': 'application/json',
               },
               withCredentials: true,
             });
-            const response = await axios.post('http://localhost:8000/api/login/', formData, { 
+            const response = await axiosInstance.post('http://localhost:8000/api/login/', formData, { 
               headers: {
                 'Content-Type': 'application/json',
               },
@@ -46,7 +46,7 @@ export const Register = ({updateAuthStatus}) => {
             localStorage.setItem('refresh_token', refresh);
       
             // Set authorization header for future API requests
-            axios.defaults.headers.common['Authorization'] = `Bearer ${access}`;
+            axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${access}`;
             updateAuthStatus(true)
             // Redirect to the home page
             navigate('/')
