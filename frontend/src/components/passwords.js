@@ -3,6 +3,7 @@ import { TopNavigation } from "./topnavbar";
 import axiosInstance from "../custom_axios";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Button } from "react-bootstrap";
 
 export const Passwords = () => {
   const [passwords, setPasswords] = useState([]);
@@ -42,25 +43,49 @@ export const Passwords = () => {
   }, [navigate]);
 
   return (
-    <div className="password-container main-content">
+    <div className="main-content">
       <TopNavigation />
-      <ul>
-        {passwords.map((password, index) => (
-          <PasswordItem id={ index }
-                        password={ password.key } 
-                        account={ password.account} 
-                        name={ password.name}
-          ></PasswordItem>
-        ))}
-      </ul>
+      <div class="flex flex-1 overflow-x-auto">
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+              <th scope="col" class="px-6 py-3">
+                Name
+              </th>
+              <th scope="col" class="px-6 py-3">
+                Account
+              </th>
+              <th scope="col" class="px-6 py-3">
+                Key
+              </th>
+              <th scope="col" class="px-6 py-3">
+                
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {passwords.map((password, index)=>(
+              <PasswordRow id={ index } name={ password.name } account={ password.account } password={ password.key }/>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
 
-const PasswordItem = ( {id, account, password, name} ) => {
+const PasswordRow = ({ id, account, password, name }) => {
   return (
-    <li key={id} className="password-item">
-      {name} | {account} | {password}
-    </li>
-  )
-}
+    <tr key={ id } class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+      <th
+        scope="row"
+        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+      >
+        { name }
+      </th>
+      <td class="px-6 py-4"> { account }</td>
+      <td class="px-6 py-4">{ password }</td>
+      <td class="px-6 py-4"><Button title="Test"/></td>
+    </tr>
+  );
+};
