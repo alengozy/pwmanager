@@ -1,7 +1,8 @@
 import axiosInstance from "../custom_axios";
 import React, { useState } from "react";
-import UserForm from "./user_form";
+import { UserForm } from "./user_form";
 import { useNavigate } from "react-router-dom";
+
 export const Login = ({updateAuthStatus}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -10,6 +11,7 @@ export const Login = ({updateAuthStatus}) => {
   const navigate = useNavigate();
   const title = 'Login'
   const button_text = 'Login';
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { TopNavigation } from "./topnavbar";
 import axiosInstance from "../custom_axios";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -23,7 +24,6 @@ export const Passwords = () => {
 
     (async () => {
       try {
-        console.log("Current access token:", localStorage.getItem("access_token"));
         const response = await axiosInstance.get("/api/password/", {
           withCredentials: true,
         });
@@ -31,39 +31,36 @@ export const Passwords = () => {
         // Initialize the visibility array with all passwords hidden
         setPasswordVisible(new Array(response.data.length).fill(false));
       } catch (error) {
+        if (error.response.status == 401) {
+          console.error("Token has expired:", error);
+          localStorage.clear();
+          navigate("/login");
+        }
         console.error("Error fetching passwords:", error);
       }
     })();
   }, [navigate]);
 
   return (
-    <table className="main-content">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Account</th>
-          <th>Password</th>
-          <th>Toggle Password</th>
-        </tr>
-      </thead>
-      <tbody>
+    <div className="password-container main-content">
+      <TopNavigation />
+      <ul>
         {passwords.map((password, index) => (
-          <tr key={index}>
-            <td>{password.id}</td>
-            <td>{password.name}</td>
-            <td>{password.account}</td>
-            <td>
-              {passwordVisible[index] ? password.key : "********"}
-            </td>
-            <td>
-              <button onClick={() => togglePasswordVisibility(index)}>
-                {passwordVisible[index] ? "Hide" : "Reveal"}
-              </button>
-            </td>
-          </tr>
+          <PasswordItem id={ index }
+                        password={ password.key } 
+                        account={ password.account} 
+                        name={ password.name}
+          ></PasswordItem>
         ))}
-      </tbody>
-    </table>
+      </ul>
+    </div>
   );
 };
+
+const PasswordItem = ( {id, account, password, name} ) => {
+  return (
+    <li key={id} className="password-item">
+      {name} | {account} | {password}
+    </li>
+  )
+}

@@ -4,7 +4,7 @@ import { Login } from "./components/login";
 import { Register } from "./components/register";
 import { Home } from "./components/home";
 import { Passwords } from "./components/passwords";
-import { Navigation } from "./components/navigation";
+import { Sidebar } from "./components/sidebar";
 import { Logout } from "./components/logout";
 import { useState } from "react";
 
@@ -18,7 +18,7 @@ function App() {
   return (
     <div className="flex">
       <BrowserRouter>
-        <Navigation isAuth={isAuth} updateAuthStatus={updateAuthStatus} />
+        <Sidebar isAuth={isAuth} updateAuthStatus={updateAuthStatus} />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/passwords" element={<Passwords />} />

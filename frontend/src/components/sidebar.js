@@ -1,7 +1,7 @@
 import { FaLock, FaUser, FaRegistered } from 'react-icons/fa'
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 
-export function Navigation({isAuth, updateAuthStatus}) {
+export const Sidebar = ({isAuth, updateAuthStatus})=> {
   useEffect(() => {
      if (localStorage.getItem("access_token") !== null) {
        updateAuthStatus(true);

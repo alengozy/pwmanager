@@ -1,6 +1,6 @@
 import axiosInstance from "../custom_axios";
 import React, { useState, useEffect } from "react";
-import UserForm from "./user_form";
+import { UserForm} from "./user_form";
 import { useNavigate } from "react-router-dom";
 
 export const Register = ({updateAuthStatus}) => {

@@ -31,6 +31,34 @@
     .grid-item {
         @apply p-10 border-solid border-2 border-[#ccc] text-center bg-[#f2f2f2]
     }
+    .top-navigation {
+        @apply flex flex-row items-center justify-start 
+        bg-gray-300 dark:bg-gray-700 bg-opacity-90 
+        w-full h-16 
+        m-0 
+        shadow-lg;
+      }
+
+      .search {
+        @apply w-1/3 flex items-center justify-start 
+        bg-gray-400 dark:bg-gray-600
+        text-gray-500
+        px-2 h-9 ml-16 mr-0 
+        rounded-md shadow-md
+        transition duration-300 ease-in-out;
+      }
+    
+      .search-input {
+        @apply w-full font-sans font-semibold
+        bg-transparent outline-none 
+        text-gray-500  placeholder-gray-500
+        pl-1 rounded;
+      }
+
+      .title-text {
+        @apply ml-4
+
+      }
 }
 @layer utilities {
     .sidebar-hr {

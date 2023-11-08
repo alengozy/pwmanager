@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Row, Col, Card, Form, Button, Spinner } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function UserForm({
+export const UserForm = ({
   title,
   handleSubmit,
   showUsernameField = true,
@@ -19,7 +19,7 @@ function UserForm({
   isLoading,
   error,
   button_text,
-}) {
+}) => {
   return (
     <div className="main-content"> 
       <Container>
@@ -131,4 +131,4 @@ function UserForm({
   );
 }
 
-export default UserForm;
+
