@@ -1,6 +1,15 @@
 import React from "react";
-import { Container, Row, Col, Card, Form, Button, Spinner } from "react-bootstrap";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  Form,
+  Button,
+  Spinner,
+} from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+import classnames from "classnames";
 
 export const UserForm = ({
   title,
@@ -21,22 +30,22 @@ export const UserForm = ({
   button_text,
 }) => {
   return (
-    <div className="main-content"> 
+    <div className="main-content">
       <Container>
         <Row className="vh-100 flex justify-content-center align-items-center">
           <Col md={8} lg={6} xs={12}>
-            <div className="border border-primary"></div>
-            <Card className="shadow px-4">
+            <div className="border-1 border-cyan-400 rounded-t"></div>
+            <Card className="shadow px-4 !rounded-t-none dark:!bg-gray-800">
               <Card.Body>
                 <div className="mb-3 mt-md-4">
-                  <h2 className="fw-bold mb-2 text-center text-uppercase">
+                  <h2 className="fw-bold mb-2 text-center text-uppercase dark:text-white">
                     {title}
                   </h2>
                   <div className="mb-3">
-                    <Form onSubmit={handleSubmit}>
+                    <Form autoComplete="off" onSubmit={handleSubmit}>
                       {showUsernameField && (
                         <Form.Group className="mb-3" controlId="Name">
-                          <Form.Label className="text-center">
+                          <Form.Label className="text-center dark:text-white">
                             Username
                           </Form.Label>
                           <Form.Control
@@ -47,15 +56,17 @@ export const UserForm = ({
                             onChange={(e) => setUsername(e.target.value)}
                             disabled={isLoading}
                             required
+                            className="dark:!bg-gray-800 dark:!text-white dark:!placeholder-gray-100"
                           />
                         </Form.Group>
                       )}
 
                       {showPasswordField && (
                         <Form.Group className="mb-3" controlId="password">
-                          <Form.Label>Password</Form.Label>
+                          <Form.Label className="text-center dark:text-white">
+                            Password
+                          </Form.Label>
                           <Form.Control
-                            className={`"" ${!error ? "" : "is-invalid"}`}
                             type="password"
                             placeholder="Keep it secret..."
                             name="password"
@@ -63,6 +74,9 @@ export const UserForm = ({
                             onChange={(e) => setPassword(e.target.value)}
                             disabled={isLoading}
                             required
+                            className={classnames("custom-form-control", {
+                              "is-invalid": error,
+                            })}
                           />
                           {!error ? null : (
                             <div className="invalid-feedback">{error}</div>
@@ -72,12 +86,14 @@ export const UserForm = ({
 
                       {showConfirmPasswordField && (
                         <Form.Group className="mb-3" controlId="check_password">
-                          <Form.Label>Confirm Password</Form.Label>
+                          <Form.Label className="text-center dark:text-white">
+                            Confirm Password
+                          </Form.Label>
                           <Form.Control
                             type="password"
-                            className={`"" ${
-                              passwordsMatch ? "" : "is-invalid"
-                            }`}
+                            className={classnames("custom-form-control", {
+                              "is-invalid": !passwordsMatch,
+                            })}
                             placeholder="Confirm Password"
                             name="password"
                             value={confirmPassword}
@@ -104,7 +120,11 @@ export const UserForm = ({
                         </div>
                       ) : (
                         <div className="d-grid">
-                          <Button variant="primary" type="submit">
+                          <Button
+                            className="!bg-cyan-400 !text-gray-700 !font-bold"
+                            variant="primary"
+                            type="submit"
+                          >
                             {button_text}
                           </Button>
                         </div>
@@ -112,7 +132,7 @@ export const UserForm = ({
                     </Form>
                     {!showLoginInstead && !isLoading && (
                       <div className="mt-3">
-                        <p className="mb-0 text-center">
+                        <p className="mb-0 text-center dark:text-gray-300">
                           Already have an account?{" "}
                           <a href="/login" className="text-primary fw-bold">
                             Sign In
@@ -129,6 +149,4 @@ export const UserForm = ({
       </Container>
     </div>
   );
-}
-
-
+};

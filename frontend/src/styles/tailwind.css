@@ -9,8 +9,8 @@
     .sidebar-icon{
         @apply relative flex items-center justify-center
         h-12 w-12 mt-2 mb-2 mx-auto shadow-lg
-        bg-gray-800 text-white
-        hover:bg-cyan-400
+        bg-gray-400 hover:bg-cyan-400 dark:bg-gray-800
+        text-cyan-400 hover:text-white
         rounded-3xl hover:rounded-xl
         transition-all duration-300 ease-linear
         cursor-pointer;
@@ -20,7 +20,7 @@
         @apply absolute w-auto p-2 m-2 min-w-max left-14
         rounded-md shadow-md
         text-white bg-gray-900
-        text-xs font-bold
+        text-xs font-[900]
         transition-all duration-100 scale-0 origin-left;
     }
 
@@ -56,18 +56,34 @@
       }
 
       .title-text {
-        @apply ml-4
+        @apply ml-4 dark:text-gray-300
 
+      }
+
+      .top-spinner {
+        @apply ml-2 mb-[0.5rem] flex
+      }
+
+      .custom-form-control {
+        @apply bg-gray-800
+        placeholder-gray-100
+        dark:!bg-gray-800
+        dark:!text-white
+        dark:!placeholder-gray-100
       }
 }
 @layer utilities {
     .sidebar-hr {
-        @apply bg-white dark:bg-gray-800
-        border border-white dark:border-gray-800 rounded-full
+        @apply bg-gray-800 dark:bg-white
+        border border-gray-800 dark:border-white rounded-full
         mx-2;
     }
 
     .main-content {
         @apply flex-1 ml-16;
+    }
+
+    .page-full {
+        @apply bg-gray-300 dark:bg-gray-600 min-h-screen
     }
 }

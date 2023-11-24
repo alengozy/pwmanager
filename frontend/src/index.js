@@ -7,7 +7,7 @@ import reportWebVitals from './reportWebVitals';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <div className='bg-gray-300 min-h-screen'>
+    <div className='page-full'>
       <App />
     </div>
   </React.StrictMode>

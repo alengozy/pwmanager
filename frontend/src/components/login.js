@@ -10,7 +10,7 @@ export const Login = ({updateAuthStatus}) => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const title = 'Login'
-  const button_text = 'Login';
+  const button_text = 'Proceed';
 
   const handleSubmit = async (e) => {
     e.preventDefault();
