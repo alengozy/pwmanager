@@ -51,7 +51,7 @@ const ThemeIcon = () => {
   const handleMode = () => setDarkTheme(!darkTheme);
   return (
     <span onClick={handleMode}>
-      <div className="sidebar-icon group">
+      <div className="sidebar-theme-icon group">
         {darkTheme ? (
           <>
             <FaSun size="28" className="text-orange-300" />

@@ -1,89 +1,104 @@
 /* src/styles/tailwind.css */
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
 /* Add your custom styles here if needed */
-@layer components{
-
-    .sidebar-icon{
-        @apply relative flex items-center justify-center
+@layer components {
+  .sidebar-icon {
+    @apply relative flex items-center justify-center
         h-12 w-12 mt-2 mb-2 mx-auto shadow-lg
         bg-gray-400 hover:bg-cyan-400 dark:bg-gray-800
         text-cyan-400 hover:text-white
         rounded-3xl hover:rounded-xl
         transition-all duration-300 ease-linear
         cursor-pointer;
-    }
-  
-    .sidebar-tooltip {
-        @apply absolute w-auto p-2 m-2 min-w-max left-14
+  }
+
+  .sidebar-theme-icon {
+    @apply relative flex items-center justify-center
+        h-12 w-12 mt-2 mb-2 mx-auto
+        hover:text-white
+        cursor-pointer;
+  }
+
+
+  .sidebar-tooltip {
+    @apply absolute w-auto p-2 m-2 min-w-max left-14
         rounded-md shadow-md
         text-white bg-gray-900
         text-xs font-[900]
         transition-all duration-100 scale-0 origin-left;
-    }
+  }
 
-    .grid-container {
-        @apply grid grid-cols-3 gap-3 max-w-[800px] m-auto
-    }
+  .grid-container {
+    @apply grid grid-cols-3 gap-3 max-w-[800px] m-auto;
+  }
 
-    .grid-item {
-        @apply p-10 border-solid border-2 border-[#ccc] text-center bg-[#f2f2f2]
-    }
-    .top-navigation {
-        @apply flex flex-row items-center justify-start 
+  .grid-item {
+    @apply p-10 border-solid border-2 border-[#ccc] text-center bg-[#f2f2f2];
+  }
+  .top-navigation {
+    @apply flex flex-row items-center justify-start 
         bg-gray-300 dark:bg-gray-700 bg-opacity-90 
         w-full h-16 
         m-0 
         shadow-lg;
-      }
+  }
 
-      .search {
-        @apply w-1/3 flex items-center justify-start 
+  .search {
+    @apply w-1/3 flex items-center justify-start 
         bg-gray-400 dark:bg-gray-600
         text-gray-500
         px-2 h-9 ml-16 mr-0 
         rounded-md shadow-md
         transition duration-300 ease-in-out;
-      }
-    
-      .search-input {
-        @apply w-full font-sans font-semibold
+  }
+
+  .search-input {
+    @apply w-full font-sans font-semibold
         bg-transparent outline-none 
         text-gray-500  placeholder-gray-500
         pl-1 rounded;
-      }
+  }
 
-      .title-text {
-        @apply ml-4 dark:text-gray-300
+  .title-text {
+    @apply ml-4 dark:text-gray-300;
+  }
 
-      }
+  .top-spinner {
+    @apply ml-2 mb-[0.5rem] flex;
+  }
 
-      .top-spinner {
-        @apply ml-2 mb-[0.5rem] flex
-      }
-
-      .custom-form-control {
-        @apply bg-gray-800
+  .custom-form-control {
+    @apply bg-gray-800
         placeholder-gray-100
         dark:!bg-gray-800
         dark:!text-white
-        dark:!placeholder-gray-100
-      }
+        dark:!placeholder-gray-100;
+  }
 }
 @layer utilities {
-    .sidebar-hr {
-        @apply bg-gray-800 dark:bg-white
+  .sidebar-hr {
+    @apply bg-gray-800 dark:bg-white
         border border-gray-800 dark:border-white rounded-full
         mx-2;
-    }
+  }
 
-    .main-content {
-        @apply flex-1 ml-16;
-    }
+  .main-content {
+    @apply flex-1 ml-16;
+  }
 
-    .page-full {
-        @apply bg-gray-300 dark:bg-gray-600 min-h-screen
-    }
+  .page-full {
+    @apply bg-gray-300 dark:bg-gray-600 min-h-screen;
+  }
+
+  tr.table-data > td,
+  tr.table-data > th,
+  td.table-data {
+    @apply text-gray-700 
+        whitespace-nowrap 
+        dark:bg-gray-700 
+        dark:text-gray-300;
+  }
 }

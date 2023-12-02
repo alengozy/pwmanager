@@ -35,7 +35,7 @@ export const Login = ({updateAuthStatus}) => {
       axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${access}`;
       updateAuthStatus(true)
       // Redirect to the home page
-      navigate('/')
+      navigate('/passwords')
     } catch (error) {
       // Handle errors, e.g., display an error message
       setError('Incorrect username or password. Please try again!')
