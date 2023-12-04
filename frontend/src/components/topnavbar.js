@@ -11,11 +11,11 @@ import useDarkMode from "../hooks/useDarkMode";
 
 export const TopNavigation = ({ isLoading }) => {
   return (
-    <div className="top-navigation">
+    <>
       <Title />
       {isLoading && <TopSpinner />}
       <Search />
-    </div>
+    </>
   );
 };
 

@@ -26,13 +26,13 @@ export const Register = ({updateAuthStatus}) => {
         try { 
             setIsLoading(true);
             const formData = { username: username, password: password }
-            await axiosInstance.post('http://localhost:8000/api/register/', formData, {
+            await axiosInstance.post('api/register/', formData, {
               headers: {
                 'Content-Type': 'application/json',
               },
               withCredentials: true,
             });
-            const response = await axiosInstance.post('http://localhost:8000/api/login/', formData, { 
+            const response = await axiosInstance.post('api/login/', formData, { 
               headers: {
                 'Content-Type': 'application/json',
               },
