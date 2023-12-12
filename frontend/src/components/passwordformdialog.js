@@ -28,9 +28,12 @@ export default function PasswordFormDialog({
             Please enter the name (e.g. 'Work' or 'Netflix'), account, and the password.
           </DialogContentText>
           <TextField
+            InputProps={{className:'dark:text-gray-300'}}
+            InputLabelProps={{className:'dark:text-gray-300'}}
             autoFocus
             margin="dense"
             id="name-controlled"
+            className="f"
             name="name"
             label="Name"
             fullWidth
@@ -39,6 +42,8 @@ export default function PasswordFormDialog({
             onChange={onChange}
           />
           <TextField
+            InputProps={{className:'dark:text-gray-300'}}
+            InputLabelProps={{className:'dark:text-gray-300'}}
             autoFocus
             margin="dense"
             id="account-controlled"
@@ -50,6 +55,8 @@ export default function PasswordFormDialog({
             onChange={onChange}
           />
           <TextField
+            InputProps={{className:'dark:text-gray-300'}}
+            InputLabelProps={{className:'dark:text-gray-300'}}
             autoFocus
             margin="dense"
             id="key-controlled"
@@ -62,9 +69,9 @@ export default function PasswordFormDialog({
             onChange={onChange}
           />
         </DialogContent>
-        <DialogActions>
-          <Button onClick={onClose}>Cancel</Button>
-          <Button onClick={onSubmit}>Add</Button>
+        <DialogActions className='dialog-content' >
+          <Button className='dialog-content' onClick={onClose}>Cancel</Button>
+          <Button className='dialog-content' onClick={onSubmit}>Add</Button>
         </DialogActions>
       </Dialog>
     </React.Fragment>

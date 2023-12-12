@@ -72,7 +72,7 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   async (error) => {
-    if (error.response && error.response.status === 401 && error.response.data.detail.code == invalid_token_code) {
+    if (error.response && error.response.status === 401 && error.response.data.detail.code === invalid_token_code) {
       console.log(error)
       if (refreshAttempts >= MAX_REFRESH_ATTEMPTS) {
         return Promise.reject("Max refresh attempts reached");

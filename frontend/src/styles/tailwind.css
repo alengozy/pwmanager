@@ -98,6 +98,10 @@
     @apply bg-gray-300 dark:bg-gray-600 min-h-screen;
   }
 
+  .MuiButton-outlined {
+    @apply text-cyan-400
+  }
+
   tr.table-data > td,
   tr.table-data > th,
   td.table-data {
